@@ -43,12 +43,12 @@ Important commands:
 2. `copy` (copies a list of files or folders from the host device to docker image)
 3. `expose` (opens ports of the docker image)
 4. `workdir` (specify the work container of the work when it starts, every command you run, will be executed here, no need to cd here)
-5. `run` (every command you specify after run will run inside of your docker container, use only *one* RUN command to save storage space!)
+5. `run` (every command you specify after run will run inside of your docker container, use only *one* RUN command to save storage space! Do a new line with \ &&)
 6. `cmd` (specifies the last command that runs forever)
 
 Hint: use *continuumio/anaconda* as base image as it already contains a good python distro with machine learning libraries
 
-
+### Dockerfile
 ```
 FROM continuum/anaconda
 COPY hfs(host_file_sys)/flask_model_folder /usr/local/flask_model_folder
@@ -57,3 +57,13 @@ WORKDIR /usr/local/flask_model_folder
 RUN pip install needed_libraries
 CMD python flask_app.py
 ```
+### Build image
+
+`sudo docker build -t name .`
+
+
+`docker ps` to look at your running containers
+
+`docker images` to look at your images
+
+`sudo docker run -p 8888:5000 rf-api` to run a docker
