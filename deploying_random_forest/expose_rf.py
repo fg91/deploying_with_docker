@@ -65,7 +65,7 @@ def predict_file():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=5000)
 
 # http://127.0.0.1:5000/predict?s_len=5.7&s_width=5.6&p_len=4.3&p_width=5.3
     
