@@ -27,3 +27,33 @@ Things you have to keep in mind in order to expose your functionalities as an AP
 2. initialize the app
 3. in our main program run the app maybe with custom port
 4. Decide wheter get (`flask1.py`) or post request (`flask2_post.py`)
+
+## UI with flasgger
+
+## Build a Docker container
+Image might look like this:
+
+* flask, flasgger and
+* Anaconda on
+* Linux (Base image)
+
+Important commands:
+
+1 `from` (specifies the base image)
+2. `copy` (copies a list of files or folders from the host device to docker image)
+3. `expose` (opens ports of the docker image)
+4. `workdir` (specify the work container of the work when it starts, every command you run, will be executed here, no need to cd here)
+5. `run` (every command you specify after run will run inside of your docker container, use only *one* RUN command to save storage space!)
+6. `cmd` (specifies the last command that runs forever)
+
+Hint: use *continuumio/anaconda* as base image as it already contains a good python distro with machine learning libraries
+
+
+```
+FROM continuum/anaconda
+COPY hfs(host_file_sys)/flask_model_folder /usr/local/flask_model_folder
+EXPOSE 5000
+WORKDIR /usr/local/flask_model_folder
+RUN pip install needed_libraries
+CMD python flask_app.py
+```

@@ -71,3 +71,5 @@ if __name__ == '__main__':
     
 # in postman: http://127.0.0.1:5000/predict_file
 # switch method to post, in body, form_data, key="input_file", value choose files
+
+# http://localhost:5000/apidocs/
