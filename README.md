@@ -10,3 +10,20 @@ More dynamic than VMs. If you have 4 containers and 3 are idle, the last one can
 ## Comparison to conda or python environments
 
 Conda envs isolate well too but Docker is more portable. Reproducability of environment leads to reproducability of output.
+
+## Get vs Post requests
+
+* Get request: parameters in url
+* Post request: more secure since not in url. Use app like postman (see file `flask2_post.py`)
+
+## Url name
+* `@app.route('/')` => `http://127.0.0.1:7000/`
+* `@app.route('/url_name')` => `http://127.0.0.1:7000/url_name`
+
+## Summary
+Things you have to keep in mind in order to expose your functionalities as an API:
+
+1. import flask
+2. initialize the app
+3. in our main program run the app maybe with custom port
+4. Decide wheter get (`flask1.py`) or post request (`flask2_post.py`)
