@@ -66,4 +66,4 @@ CMD python flask_app.py
 
 `docker images` to look at your images
 
-`sudo docker run -p 8888:5000 rf-api` to run a docker
+`sudo docker run -p 8888:5000 rf-api` to run a docker and map from port 5000 (container) to port 8888 localhost of host machine
