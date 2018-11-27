@@ -1,4 +1,4 @@
-FROM continuumio/anaconda:4.4.0
+FROM continuumio/anaconda3:4.4.0
 MAINTAINER UNP, https://unp.education
 COPY ./deploying_random_forest/ /usr/local/python/
 EXPOSE 5000
