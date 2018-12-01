@@ -67,3 +67,50 @@ CMD python flask_app.py
 `docker images` to look at your images
 
 `sudo docker run -p 8888:5000 rf-api` to run a docker and map from port 5000 (container) to port 8888 localhost of host machine
+
+## Building production grade Docker application
+Until now we only started a flask development server in our Docker application. This is nice for development but does not scale enough for production.
+
+### Docker deployment with flask
+We will use an industry grade webserver to host our flask application.
+
+1. Apache
+2. Nginx
+
+These servers are meant to be webservers and are expected to *scale* regardless of number of current users.
+
+Flask is not advisable for production.
+
+We need to build a bridge between our python app *Flask* and a mature webserver like *Apache* called **WSGI** (Webserver Gateway Interface). 
+
+End-user or software will hit the webserver with requests. Apache will *split* those requests. You have to provision for the number of concurrent users. Apache can handle all that with the right underlying hardware by consuming, coordinating and routing them through WSGI to our Flask application. Flask runs the machine learning predictor, sends back the results through WSGI to Apache which sends the results to the end-user.
+
+You have to also install the python module `mod_wsgi` (into `requirements.txt`.
+
+### Writing the wsgi file
+Same name as python script with `.wsgi` suffix.
+Needs to know the exact python environment and the exact python object that contains the app.
+
+Note that the port specified in flask is only the development server. Will be overriden by Apache web server port specified in Dockerfile.
+
+Create the image and then launch a container that leverages this image:
+
+`docker run -d -p 8888:8000 apache-flask`
+
+### Debugging Docker container
+Attach your terminal to the docker containers terminal:
+`docker exec -it <id> bash` (find out id with `docker ps`)
+
+Check apaches logs: `emacs /etc/mod_wsgi-express-80/error_log`
+
+## Quiz
+1. In Docker, a union file system is the union of read-write layer and all read-only layers
+2. Docker Images have different states and keep changing with time. False
+3. In what format are Docker images identified? 64 hexadecimal digit string
+4. Which of the following is True? In Docker, when a container is exited. The state of the filesystem is stored but the processes are not.
+5. What is the command used to convert a container into an image? docker commit
+6. The default registry is accessible using the command: sudo docker search
+7. Which of the following command is used to associate an image with a repository (or multiple repositories) at build time? sudo docker build -t NAME
+8. docker ps shows all *running* containers by default.
+9. By default, in what mode do Docker containers run in? And what is the value of the -d option that specifies the mode in which docker container runs? foreground mode; -d = True
+10. docker diff command has 3 events listed in it: A-Add, D-Delete, C-Change
