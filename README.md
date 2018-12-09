@@ -104,7 +104,7 @@ Attach your terminal to the docker containers terminal:
 Check apaches logs: `emacs /etc/mod_wsgi-express-80/error_log`
 
 ### Removing all unused images
-`sudo docker prune`
+`sudo docker prune` or `docker system prune -a`
 
 ## Quiz
 1. In Docker, a union file system is the union of read-write layer and all read-only layers
