@@ -6,6 +6,6 @@ COPY package.json .
 
 RUN npm install
 
-COPY . .
+COPY kubernetes_course/client .  # So that .travis.yml can be in root directory
 
 CMD ["npm", "run", "start"]
