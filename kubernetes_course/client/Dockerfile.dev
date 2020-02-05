@@ -2,10 +2,10 @@ FROM node:alpine
 
 WORKDIR '/app'
 
-COPY kubernetes_course/client/package.json .
+COPY package.json .
 
 RUN npm install
 
-COPY kubernetes_course/client/ .  # So that .travis.yml can be in root directory
+COPY . .
 
 CMD ["npm", "run", "start"]
