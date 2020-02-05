@@ -4,8 +4,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t test_client -f Dockerfile.dev .
-
+  - docker build -t test_client -f kubernetes_course/client/Dockerfile.dev .
 
 script:
   - docker run -e CI=true test_client npm run test
