@@ -20,5 +20,4 @@ deploy:
   on:
     branch: master  # Only deploy when pushed to master
   access_key_id: $AWS_ACCESS_KEY  # Set up in Travis CI under environment
-  secret_access_key:
-    secure: "$AWS_SECRET_ACCESS_KEY"
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
