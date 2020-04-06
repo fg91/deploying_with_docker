@@ -9,3 +9,16 @@ before_install:
 
 script:
   - docker run -e CI=true test_client npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-central-1"
+  app: "Client"  # This is the app name specified in EBS
+  env: "Client-env"
+  bucket_name: "elasticbeanstalk-eu-central-1-538166042870"  # Automatically created by EBS
+  bucket_path: "Client"  # By default same as app name
+  on:
+    branch: master  # Only deploy when pushed to master
+  access_key_id: $AWS_ACCESS_KEY  # Set up in Travis CI under environment
+  secret_access_key:
+    secure: "$AWS_SECRET_ACCESS_KEY"
