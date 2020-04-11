@@ -1,0 +1,26 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - cd kubernetes_course/fibonacci/  # Here, we only test the react part which is in folder `client`. One could build several images to test different components.
+  - docker build -t fabiograetz/test_client -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true fabiograetz/test_client npm run test
+
+after_success:
+  - docker build -t fabiograetz/multi-client ./client
+  - docker build -t fabiograetz/multi-nginx ./nginx
+  - docker build -t fabiograetz/multi-server ./server
+  - docker build -t fabiograetz/multi-worker ./worker
+  # Login to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push fabiograetz/multi-client
+  - docker push fabiograetz/multi-nginx
+  - docker push fabiograetz/multi-server
+  - docker push fabiograetz/multi-worker
+  
+
